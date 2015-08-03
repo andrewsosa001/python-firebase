@@ -3,7 +3,7 @@ import urlparse #for urlparse and urljoin
 import os #for os.path.dirname
 import json #for dumps
 
-
+s = requests.Session()
 
 class Firebase():
     ROOT_URL = '' #no trailing slash
@@ -84,7 +84,7 @@ class Firebase():
                 del kwargs['params']
             params.update({'auth': self.auth_token})
 
-        r = requests.request(method, self.__url(), params=params, **kwargs)
+        r = s.request(method, self.__url(), params=params, **kwargs)
         r.raise_for_status() #throw exception if error
         return r.json()
 
